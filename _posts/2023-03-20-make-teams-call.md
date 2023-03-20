@@ -1,48 +1,17 @@
 ---
 title:  Send a message to teams channel
 layout: base
+excerpt_separator: <!--more-->
 categories: 
 -  Send a message to teams channel
-excerpt_separator: <!--more-->
 ---
-### make_teams_call_v2
+### make_teams_call(logging_obj)
 &emsp; This function will send messages to the Microsoft Teams.
 <!--more-->
-##### Code
+##### input
 ```python
-def make_teams_call_v2(logging_obj):
-    url = logging_obj['url']
-    sections = []
-
-    for i in ['incoming_query', 'local_variables', 'bnb_request', 'bnb_response', 'pricing_system_request', 'pricing_system_response', 'pa_request', 'pa_response', 'api_response', 'notes', 'errors']:
-        #logging.info(i)
-        if i in logging_obj['data']:
-            clean_val = ujson.loads(ujson_dumps(logging_obj['data'][i]))
-            logging.info(clean_val)
-            sections.append({
-                'startGroup':True,
-                'activityTitle': i,
-                #'text': ujson_dumps(logging_obj['data'][i], pretty_print=True)
-                'text': deep_value_sort(clean_val)
-            })
-
-    d = {
-        "@type":"MessageCard",
-        "@context": "https:\/\/schema.org\/extensions",
-        "title":f"Hyper Message {logging_obj['title']}",
-        "summary":"this will not show up",
-        "themeColor":"0078D7",
-        "sections": sections
-    }
-
-    logging.info(d)
-    x = requests.post(url, data=ujson.dumps(d), headers={'Content-type':'application/JSON'})
-    logging.info(x.status_code)
-    logging.info(x.text)
-```
-##### Example
-```json
-{
+>>> from mechanics import make_teams_call_v2 as make_teams_call
+>>> logging_obj = {
     "@type": "MessageCard",
     "@context": "https:\\/\\/schema.org\\/extensions",
     "title": "Hyper Message [RLS] Richproducts API Call",
@@ -84,7 +53,7 @@ def make_teams_call_v2(logging_obj):
             "text": "making_bid=truerate=501.69currency=USDcarrierRateReference=RP20230320203142carrierExpirationDate=2023-03-22T10:01:42-0500"        }
     ]
 }
+>>> make_teams_call(logging_obj)
 ```
-![](../images/make_teams_call.png)
-
+##### output
 ![](../images/teams_log.png)

@@ -4,15 +4,17 @@ layout: base
 excerpt_separator: <!--more-->
 categories: 
 - Date Manipulation
---- 
-### format_df_to_str
+---
+### format_df_to_str(d)
 &emsp; It takes an input as a datetime object and converts it into a datetime string in ''%Y-%m-%d’' format.
 <!--more-->
-##### Code
+##### input
 ```python
-def format_df_to_str(d):
-    if d == None: return datetime.datetime.now().strftime('%Y-%m-%d')
-    else: return d.strftime('%Y-%m-%d')
+>>> import datetime
+>>> from mechanics import format_df_to_str
+>>> print(format_df_to_str(datetime.datetime.now()))
 ```
-###### Example
-![](../images/20230320_204211_format_df_to_str.png)
+##### output
+```python
+2023-03-20
+```

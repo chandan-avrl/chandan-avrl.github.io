@@ -5,19 +5,15 @@ excerpt_separator: <!--more-->
 categories: 
 - Convert Python objects into a json string
 ---
-### ujson_dumps
-&emsp; This function converts a subset of convertible Python objects into a json string
+### ujson_dumps(d, pretty_print=False)
+&emsp; This function converts a subset of convertible Python objects into a json string.
 <!--more-->
-###### Code
+###### input
 ```python
-def ujson_dumps(d, pretty_print=False):
-    if type(d) == dict:
-        m = clean_dtf_from_dict_for_json_dumping(d)
-        if pretty_print: ujson.dumps(m, indent=4)
-        return ujson.dumps(m)
-    else:
-        if pretty_print: return ujson.dumps(d, indent=4)
-        else: return ujson.dumps(d)
+>>> from mechanics import ujson_dumps 
+>>> ujson_dumps({"key_a": "value_a", "key_b": "value_b"})
 ```
-###### Example
-![](../images/ujson_dumps.png)
+###### output
+```python
+'{"key_a": "value_a", "key_b": "value_b"}'
+```

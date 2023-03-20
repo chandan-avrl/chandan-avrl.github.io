@@ -5,15 +5,15 @@ excerpt_separator: <!--more-->
 categories: 
 - Date Manipulation
 ---
-### format_str_to_df
+### format_str_to_df(s)
 &emsp; It takes an input as a datetime string in "%Y-%m-%d" format and converts it into a datetime object.
 <!--more-->
-##### Code
+##### input:
 ```python
-def format_str_to_df(s):
-    if s == None: return datetime.datetime.now()
-    elif s == '': return ''
-    else: return datetime.datetime.strptime(s, '%Y-%m-%d')
+>>> from mechanics import format_str_to_df
+>>> format_str_to_df("2023-03-20")
 ```
-##### Example
-![](../images/format_str_to_df.png)
+##### output
+```python
+datetime.datetime(2023, 3, 20, 0, 0)
+```
