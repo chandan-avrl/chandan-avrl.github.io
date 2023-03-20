@@ -92,7 +92,8 @@
                 {% endif %}
               {% endfor %}
               <div id="{{cat}}" class="collapse {{action}}">
-                {% for post in site.categories[cat] %}
+                {% assign posts = site.categories[cat] | reverse %}
+                {% for post in posts %}
                     <a href="{{ post.url }}" class="collapse-items">{{ post.title }}</a>
                 {% endfor %}
               </div>
