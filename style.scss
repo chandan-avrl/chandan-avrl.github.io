@@ -82,6 +82,10 @@ h4 {
   color: $gray;
 }
 
+h5 {
+  font-size: 17px;
+}
+
 p {
   margin: 15px 0;
 }
@@ -175,9 +179,10 @@ img {
   justify-content: center;
 }
 .content{
-  width: 78%;
+  width: 85%;
   overflow-y: auto;
   padding-right: 10px;
+  padding-bottom: 20px;
 }
 .masthead {
   padding: 20px 0;

@@ -15,6 +15,45 @@
     href="{{ site.baseurl }}/feed.xml" />
 
   <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+  <style>
+    .collapse {
+      border-top: 1px solid rgb(230,230,230);
+      margin-left: 20px;
+      transition: height 0.3s ease-in;
+    }
+    .collapse.hide {
+      border: unset;
+      height: 0px;
+      overflow: hidden;
+      margin: 0;
+    }
+    .collapse.show {
+      height: auto;
+    }
+    .collapse .collapse-items {
+      display: block;
+      border-bottom: 1px solid rgb(230,230,230);
+      font-size: 14px;
+      padding: 3px 0;
+    }
+    .collapse .collapse-items:last-child {
+      border: unset;
+    }
+
+    .pagination-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .pagination-row .prev-page {
+      float: left;
+    }
+
+    .pagination-row .next-page {
+      float: left;
+    }
+  </style>
 </head>
 
 <body>
@@ -35,17 +74,51 @@
       </header>
     </div>
   </div>
-
+  
   <div id="main" role="main" class="container">
     <div class="side_panel">
       <h2>Table of Contents</h2>
-      {% for post in site.posts %}
-      <h3><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h3>
+      {% for category in site.categories %}
+        {% assign cat = category[0] %}
+          {% if site.categories[cat].size > 1 %}
+            <h3>
+              <a href="#" onclick="controlCollapsible('{{cat}}')">{{ cat }}</a>
+              {% for post in site.categories[cat] %}
+                {% if page.url == post.url %} 
+                  {% assign action="show" %}
+                  {% break %}
+                {% else %} 
+                  {% assign action="hide" %}
+                {% endif %}
+              {% endfor %}
+              <div id="{{cat}}" class="collapse {{action}}">
+                {% for post in site.categories[cat] %}
+                    <a href="{{ post.url }}" class="collapse-items">{{ post.title }}</a>
+                {% endfor %}
+              </div>
+            </h3>
+          {% else %}
+            <h3><a href="{{ site.baseurl }}{{ site.categories[cat][0].url }}">{{ cat }}</a></h3>
+          {% endif %}
       {% endfor %}
+      <!-- {% for post in site.posts %}
+      <h3><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h3>
+      {% endfor %} -->
+      <div>{{ site.baseurl }}</div>
     </div>
     <div class="content">
       <h2>{{ page.title }}</h2>
       {{ content }}
+      <div class="pagination-row">
+        {% if page.previous %}
+          <a href="{{site.baseurl}}{{page.previous.url}}" class="prev-page" aria-label="Previous page: {{page.previous.title}}">&laquo; Prev Page</a>
+        {% else %}
+          <div></div>
+        {% endif %}
+        {% if page.next %}
+          <a href="{{site.baseurl}}{{page.next.url}}" class="next-page" aria-label="Previous page: {{page.previous.title}}">Next Page &raquo;</a>
+        {% endif %}
+      </div>
     </div>
   </div>
 
@@ -58,6 +131,16 @@
   </div>
 
   {% include analytics.html %}
+
+  <script>
+    function controlCollapsible(id) {
+      let elm = document.getElementById(id);
+      if(elm.classList.contains('hide'))
+        elm.classList.replace('hide', 'show')
+      else
+        elm.classList.replace('show', 'hide')
+    }
+  </script>
 </body>
 
 </html>
