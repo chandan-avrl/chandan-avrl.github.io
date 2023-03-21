@@ -9,7 +9,7 @@ categories:
 &emsp; This function will send messages to the Microsoft Teams.
 <!--more-->
 ##### input
-```python
+```shell
 >>> from mechanics import make_teams_call_v2 as make_teams_call
 >>> logging_obj = {
     "@type": "MessageCard",

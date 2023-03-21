@@ -9,12 +9,12 @@ categories:
 &emsp; It takes an input as a datetime object and converts it into a datetime string in ''%Y-%m-%d’' format.
 <!--more-->
 ##### input
-```python
+```shell
 >>> import datetime
 >>> from mechanics import format_df_to_str
 >>> print(format_df_to_str(datetime.datetime.now()))
 ```
 ##### output
-```python
+```shell
 2023-03-20
 ```

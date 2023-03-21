@@ -9,11 +9,11 @@ categories:
 &emsp; This function converts a subset of convertible Python objects into a json string.
 <!--more-->
 ###### input
-```python
+```shell
 >>> from mechanics import ujson_dumps 
 >>> ujson_dumps({"key_a": "value_a", "key_b": "value_b"})
 ```
 ###### output
-```python
+```shell
 '{"key_a": "value_a", "key_b": "value_b"}'
 ```
